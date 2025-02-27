@@ -281,23 +281,25 @@ const CurrentWeatherDetails = ({ weatherDataCurHour, sunTimes }) => {
                   }}
                 >
                   <CardContent>
-                    <Box sx={{ width: { xs: '95%', md: '67%' }, margin: '0 auto', height: { xs: 100, sm: 'auto' } }}>
-                      <Line
-                        data={chartData}
-                        options={{
-                          responsive: true,
-                          maintainAspectRatio: false,
-                          scales: {
-                            x: { display: false, reverse: true },
-                            y: { display: false },
-                          },
-                          plugins: {
-                            legend: { display: false },
-                            tooltip: { enabled: false },
-                          },
-                        }}
-                      />
-                    </Box>
+                    {(current < 20) &&
+                      <Box sx={{ width: { xs: '95%', md: '67%' }, margin: '0 auto', height: { xs: 100, sm: 'auto' } }}>
+                        <Line
+                          data={chartData}
+                          options={{
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                              x: { display: false, reverse: true },
+                              y: { display: false },
+                            },
+                            plugins: {
+                              legend: { display: false },
+                              tooltip: { enabled: false },
+                            },
+                          }}
+                        />
+                      </Box>
+                    }
 
                     <Box display="flex" justifyContent="space-between" mt={2} sx={{ width: { xs: '100%', md: '70%' }, margin: '0 auto', }}>
                       <Box textAlign="center">
