@@ -4,7 +4,6 @@ const User = require('../models/User');
 const authMiddleware = async (req, res, next) => {
     try {
         let userUUID = req.cookies.userUUID;
-        console.log(userUUID);
         if (!userUUID) {
             userUUID = uuidv4();
             res.cookie('userUUID', userUUID, { maxAge: 365 * 24 * 60 * 60 * 1000, httpOnly: true, sameSite: 'strict' });
@@ -20,7 +19,6 @@ const authMiddleware = async (req, res, next) => {
         }
 
         req.userUUID = userUUID;
-        console.log(req.userUUID);
         next();
     } catch (error) {
         console.error("Error in authMiddleware:", error);
