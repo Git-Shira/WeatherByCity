@@ -25,7 +25,6 @@ router.get('/search', async (req, res) => {
             }));
 
         const userUUID = req.userUUID;
-        console.log(userUUID);
 
         if (!data || data.length === 0)
             res.status(404).send({ message: 'No cities matching your search were found.' });
@@ -66,7 +65,6 @@ router.post("/", async (req, res) => {
     const userUUID = req.userUUID;
     if (!userUUID)
         return res.status(400).send({ message: 'Missing query parameter. Please provide user UUID.' });
-    console.log(userUUID);
 
     const locationData = req.body.location;
 
