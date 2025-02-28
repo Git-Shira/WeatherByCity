@@ -15,9 +15,16 @@ connectDB();
 app.use(express.json());
 app.use(cookieParser());
 
+const allowedOrigins = ['http://localhost:5173', 'https://weather-by-city.vercel.app', 'https://weather-by-city-shira-prod.vercel.app', 'https://weather-by-city-git-main-shira-prod.vercel.app'];
+
 const corsOptions = {
     origin: function (origin, callback) {
-        callback(null, true);
+        const isAllowedOrigin = allowedOrigins.includes(origin) || (origin && origin.endsWith('.vercel.app'));
+        if (!origin || isAllowedOrigin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
     },
     methods: ['GET', 'POST', 'DELETE', 'PUT'],
     allowedHeaders: ['Content-Type', 'Authorization'],
