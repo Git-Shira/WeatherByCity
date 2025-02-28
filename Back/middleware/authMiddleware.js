@@ -6,11 +6,11 @@ const authMiddleware = async (req, res, next) => {
         let userUUID = req.cookies.userUUID;
         if (!userUUID) {
             userUUID = uuidv4();
-            res.cookie('userUUID', userUUID, { maxAge: 365 * 24 * 60 * 60 * 1000, httpOnly: true, sameSite: 'strict' });
+            res.cookie('userUUID', userUUID, { maxAge: 365 * 24 * 60 * 60 * 1000, httpOnly: true, sameSite: 'lax' });
 
             await User.create({ uuid: userUUID, locations: [] });
         } else {
-            res.cookie('userUUID', userUUID, { maxAge: 365 * 24 * 60 * 60 * 1000, httpOnly: true, sameSite: 'strict' });
+            res.cookie('userUUID', userUUID, { maxAge: 365 * 24 * 60 * 60 * 1000, httpOnly: true, sameSite: 'lax' });
 
             await User.updateOne(
                 { uuid: userUUID },
