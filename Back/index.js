@@ -19,7 +19,10 @@ const allowedOrigins = ['http://localhost:5173', 'https://weather-by-city.vercel
 
 const corsOptions = {
     origin: function (origin, callback) {
-        const isAllowedOrigin = allowedOrigins.includes(origin) || (origin && origin.endsWith('.vercel.app'));
+        const isAllowedOrigin = allowedOrigins.includes(origin) ||
+            (origin && origin.startsWith('http://localhost')) ||
+            (origin && origin.endsWith('.vercel.app'));
+
         if (!origin || isAllowedOrigin) {
             callback(null, true);
         } else {
